@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('trabajador_areas', function (Blueprint $table) {
             $table->id();
             $table->integer('nivel');
-            $table->string('identificador');
+            $table->string('identificador')->unique();
             $table->string('name');
             $table->string('clave');
             $table->timestamps();

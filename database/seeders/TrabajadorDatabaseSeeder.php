@@ -21,5 +21,6 @@ class TrabajadorDatabaseSeeder extends Seeder
         $this->call(TrabajadorCategoriaOcupacionalSeeder::class);
         $this->call(TrabajadorGradoCientificoSeeder::class);
         $this->call(TrabajadorProfesionSeeder::class);
+        $this->call(TrabajadorSeeder::class);
     }
 }

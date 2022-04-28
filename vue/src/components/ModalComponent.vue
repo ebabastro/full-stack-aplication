@@ -56,10 +56,20 @@
                   v-else
                   class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
                 >
-                  <CheckIcon 
+                  <svg
                     class="h-6 w-6 text-green-600"
-                    aria-hidden="true"
-                  />
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
                 </div>
                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   <DialogTitle
@@ -104,7 +114,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
-import { ExclamationIcon, CheckIcon  } from "@heroicons/vue/outline";
+import { ExclamationIcon, CheckIcon } from "@heroicons/vue/outline";
 
 export default {
   props: {

@@ -15,7 +15,7 @@
         </router-link>
       </p> -->
     </div>
-      <ModalComponent :open="modal" :errorMsg="errorMsg" @clicked="closeModal">
+      <ModalComponent :open="modal" :msg="errorMsg" :error="true" @clicked="closeModal">
         <template v-slot:modal-header>
           Error de autenticación
         </template>

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('trabajador_profesions', function (Blueprint $table) {
             $table->id();
-            $table->string('identificador');
+            $table->string('identificador')->unique();
             $table->string('name');
             $table->timestamps();
         });

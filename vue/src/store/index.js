@@ -24,6 +24,7 @@ const store = createStore({
             token: sessionStorage.getItem("TOKEN"),
         },
         estudiante: [],
+        trabajador: [],
     },
     getters: {},
     actions: {
@@ -48,6 +49,13 @@ const store = createStore({
                     return data;
                 })
         },
+        getTrabajador({ commit }, ci) {
+            return axiosClient.post('/getTrabajador', ci)
+                .then(({ data }) => {
+                    commit('setTrabajador', data);
+                    return data;
+                })
+        },
         logout({ commit }) {
             return axiosClient.post('/logout')
                 .then(response => {
@@ -55,12 +63,12 @@ const store = createStore({
                     return response;
                 })
         },
-        createUser({commit}, user){
-          user.ci = this.state.estudiante[0].ci;
-          return axiosClient.post('/createUser', user)
-            .then(response => {
-              return response;
-            })
+        createUser({ commit }, user) {
+            user.ci = this.state.estudiante[0].ci;
+            return axiosClient.post('/createUser', user)
+                .then(response => {
+                    return response;
+                })
         }
 
     },
@@ -76,6 +84,9 @@ const store = createStore({
         },
         setEstudiante: (state, estudianteData) => {
             state.estudiante = estudianteData;
+        },
+        setTrabajador: (state, trabajadorData) => {
+            state.trabajador = trabajadorData;
         }
     },
     modules: {},
