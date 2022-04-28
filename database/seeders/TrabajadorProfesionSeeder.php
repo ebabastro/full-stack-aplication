@@ -20,11 +20,9 @@ class TrabajadorProfesionSeeder extends Seeder
         DB::table('trabajador_profesions')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
-        $profesions = DB::connection('mysql3')->table('t_profesiones')->get();
-        foreach ($profesions as $value) {
+        $profesions = DB::connection('mysql2')->table('t_profesiones')->get();
 
-            echo $value-> Id_Profesion;
-            echo $value-> Desc_Profesion;
+        foreach ($profesions as $value) {
             Trabajador_profesion::create([
                 'identificador' => $value->Id_Profesion,
                 'name' => $value->Desc_Profesion

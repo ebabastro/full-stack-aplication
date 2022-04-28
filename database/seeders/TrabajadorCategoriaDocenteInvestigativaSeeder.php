@@ -20,7 +20,7 @@ class TrabajadorCategoriaDocenteInvestigativaSeeder extends Seeder
         DB::table('trabajador_categoria_docente_investigativas')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
-        $annos = DB::connection('mysql3')->table('t_categorias_docente_invest')->get();
+        $annos = DB::connection('mysql2')->table('t_categorias_docente_invest')->get();
 
         foreach ($annos as $key => $value) {
             Trabajador_categoria_docente_investigativa::create([

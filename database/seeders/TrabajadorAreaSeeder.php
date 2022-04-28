@@ -20,7 +20,7 @@ class TrabajadorAreaSeeder extends Seeder
         DB::table('trabajador_areas')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
-        $annos = DB::connection('mysql3')->table('t_plantilla')->get();
+        $annos = DB::connection('mysql2')->table('t_plantilla')->get();
 
         foreach ($annos as $key => $value) {
             Trabajador_area::create([

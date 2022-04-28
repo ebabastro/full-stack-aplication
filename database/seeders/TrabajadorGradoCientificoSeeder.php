@@ -20,7 +20,7 @@ class TrabajadorGradoCientificoSeeder extends Seeder
         DB::table('trabajador_grado_cientificos')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
-        $annos = DB::connection('mysql3')->table('t_grado_cientifico')->get();
+        $annos = DB::connection('mysql2')->table('t_grado_cientifico')->get();
 
         foreach ($annos as $key => $value) {
             Trabajador_grado_cientifico::create([

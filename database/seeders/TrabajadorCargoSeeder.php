@@ -20,7 +20,7 @@ class TrabajadorCargoSeeder extends Seeder
         DB::table('trabajador_cargos')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
-        $annos = DB::connection('mysql3')->table('t_cargos')->get();
+        $annos = DB::connection('mysql2')->table('t_cargos')->get();
 
         foreach ($annos as $key => $value) {
             Trabajador_cargo::create([
