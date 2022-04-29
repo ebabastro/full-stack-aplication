@@ -63,8 +63,15 @@ const store = createStore({
                     return response;
                 })
         },
-        createUser({ commit }, user) {
+        createUserEstudiante({ commit }, user) {
             user.ci = this.state.estudiante[0].ci;
+            return axiosClient.post('/createUser', user)
+                .then(response => {
+                    return response;
+                })
+        },
+        createUserTrabajador({ commit }, user) {
+            user.ci = this.state.trabajador[0].ci;
             return axiosClient.post('/createUser', user)
                 .then(response => {
                     return response;

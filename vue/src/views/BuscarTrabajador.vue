@@ -5,7 +5,7 @@
         Buscar Trabajador
       </h1>
     </template>
-    <ModalComponent :open="modal" :errorMsg="errorMsg" @clicked="closeModal">
+    <ModalComponent :open="modal" :msg="errorMsg" @clicked="closeModal" :error="true">
       <template v-slot:modal-header>
         Carnet de Identidad no encontrado
       </template>
@@ -70,7 +70,7 @@ function closeModal(value) {
   modal.value = value;
 }
 
-function getEstudiante(ev) {
+function getTrabajador(ev) {
   ev.preventDefault();
   store
     .dispatch("getTrabajador", ci)

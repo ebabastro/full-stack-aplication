@@ -10,31 +10,32 @@ use Illuminate\Validation\Rules\Password;
 class UsernameController extends Controller
 {
 
-    public function createUser(Request $request){
+    public function createUser(Request $request)
+    {
 
-       $rules = [
-           'ci' => 'bail|required|unique:usernames,ci',
-           'username' => 'bail|required|string|unique:usernames,username',
-           'password' => [
-               'bail',
-               'required',
-               'confirmed',
-               Password::min(8)->mixedCase()->numbers()->symbols()
-           ]
-       ];
-       
-       $messages = [
-           'ci.required' => 'El carnet de identidad es necesario',
-           'ci.unique' => 'Ya existe un usuario con el carnet de identidad enviado',
-           'username.required' => 'El nombre de ususario es necesario',
-           'username.unique' => 'El nombre de usuario ya existe',
-           'password.required' => 'La contraseña  es necesaria',
-           'password.confirmed' => 'Debe confirmar la contraseña',
-        //    Password::min(8) => 'La contraseña debe tener al menos 8 caracteres',
-        //    Password::mixedCase() => 'La contraseña debe contener mayúsculas y minúsculas',
-        //    Password::numbers() => 'La contraseña debe contener números',
-        //    Password::symbols() => 'La contraseña debe contener símbolos'
-       ];
+        $rules = [
+            'ci' => 'bail|required|unique:usernames,ci',
+            'username' => 'bail|required|string|unique:usernames,username',
+            'password' => [
+                'bail',
+                'required',
+                'confirmed',
+                Password::min(8)->mixedCase()->numbers()->symbols()
+            ]
+        ];
+
+        $messages = [
+            'ci.required' => 'El carnet de identidad es necesario',
+            'ci.unique' => 'Ya existe un usuario con el carnet de identidad enviado',
+            'username.required' => 'El nombre de usuario es necesario',
+            'username.unique' => 'El nombre de usuario ya existe',
+            'password.required' => 'La contraseña  es necesaria',
+            'password.confirmed' => 'Debe confirmar la contraseña',
+            //    Password::min(8) => 'La contraseña debe tener al menos 8 caracteres',
+            //    Password::mixedCase() => 'La contraseña debe contener mayúsculas y minúsculas',
+            //    Password::numbers() => 'La contraseña debe contener números',
+            //    Password::symbols() => 'La contraseña debe contener símbolos'
+        ];
         $data = $request->validate($rules, $messages);
         /** @var \App\Models\Username $user */
         $user = Username::create([
@@ -64,7 +65,6 @@ class UsernameController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -75,7 +75,6 @@ class UsernameController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**

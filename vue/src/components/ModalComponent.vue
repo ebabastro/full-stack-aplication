@@ -76,7 +76,9 @@
                     as="h3"
                     class="text-lg leading-6 font-medium text-gray-900"
                   >
-                    <slot name="modal-header"></slot>
+                    <slot name="modal-header">
+
+                    </slot>
                   </DialogTitle>
                   <div class="mt-2">
                     <p class="text-sm text-gray-500">

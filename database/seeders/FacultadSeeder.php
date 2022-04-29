@@ -29,5 +29,10 @@ class FacultadSeeder extends Seeder
                 'identificador' => $value->Id_FAC,
             ]);
         }
+        Facultad::create([
+            'name' => '',
+            'code' => '',
+            'identificador' => ''
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\UsernameController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Route::post('/register',[AuthController::class, 'register']);
 
 Route::post('/login',[AuthController::class, 'login']);
 Route::post('/getEstudiante',[EstudianteController::class, 'getEstudiante']);
+Route::post('/getTrabajador',[TrabajadorController::class, 'getTrabajador']);
 
 Route::post('/createUser',[UsernameController::class, 'createUser']);
 

@@ -2,7 +2,7 @@
 <template>
   <ModalComponent :open="modal" :msg="msg" @clicked="closeModal" :error="error">
     <template v-slot:modal-header>
-      Error durante la creación de usuario
+      {{status}}
     </template>
   </ModalComponent>
   <TransitionRoot as="template" :show="open">
@@ -178,9 +178,10 @@ let user = {
   password: "",
   password_confirmation: "",
 };
-const msg = ref("");
-const error = ref(false);
+let msg = ref("");
+let error = ref(false);
 let modal = ref(false);
+let status = ref("");
 
 function closeModal() {
   modal.value = false;
@@ -189,12 +190,13 @@ function closeModal() {
 function createUser(ev) {
   ev.preventDefault();
   store
-    .dispatch("createUser", user).then((msg) => {
-      msg.value = msg.data.message;
+    .dispatch("createUserTrabajador", user).then((msg) => {
+      error.value = false;
+      status.value = 'Usuario añadido con éxito';
       modal.value = true;
     })
       .catch((err) => {
-        msg.value = err.response.data.message;
+        status.value = "Error durante la creación de usuario";
         error.value = true;
         modal.value = true;
   });

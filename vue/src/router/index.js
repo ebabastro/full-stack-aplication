@@ -6,8 +6,9 @@ import Register from '../views/Register.vue';
 import DefaultLayout from '../components/DefaultLayout.vue';
 import AuthLayout from '../components/AuthLayout.vue';
 import store from "../store";
-import BuscarEstudiante from '../views/BucarEstudiante.vue'
-import EstudianteView from '../views/EstudianteView.vue'
+import BuscarEstudiante from '../views/BucarEstudiante.vue';
+import EstudianteView from '../views/EstudianteView.vue';
+import TrabajadorView from '../views/TrabajadorView.vue';
 
 const routes = [{
         path: '/',
@@ -19,6 +20,7 @@ const routes = [{
             { path: '/buscarEstudiante', name: 'BuscarEstudiante', component: BuscarEstudiante },
             { path: '/buscarTrabajador', name: 'BuscarTrabajador', component: BuscarTrabajador },
             { path: '/buscarEstudiante/estudiante', name: 'Estudiante', component: EstudianteView },
+            { path: '/buscarTrabajador/trabajador', name: 'Trabajador', component: TrabajadorView },
 
         ]
     },

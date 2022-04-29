@@ -29,5 +29,11 @@ class CumSeeder extends Seeder
                 'code' => $value->Code
             ]);
         }
+
+        Cum::create([
+            'identificador' => '',
+            'name' => '',
+            'code' => ''
+        ]);
     }
 }

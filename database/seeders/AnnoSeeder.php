@@ -30,5 +30,14 @@ class AnnoSeeder extends Seeder
                 'code' => $value->Code
             ]);
         }
+
+        Anno::create([
+            'name' => '',
+            'code' => ''
+        ]);
+        Anno::create([
+            'name' => '0',
+            'code' => '0'
+        ]);
     }
 }
