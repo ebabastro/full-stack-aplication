@@ -44,11 +44,17 @@ class EstudianteController extends Controller
             ->join('tipo_cursos','estudiantes.tipo_curso_id','=','tipo_cursos.id')
             ->join('annos', 'estudiantes.anno_id','=','annos.code')
             ->where('estudiantes.ci','=',$ci)
+            ->where('estudiantes.estado_id','=','2')
             ->get();
 
-        
-
-        return $estudiante;
+            if (sizeof($estudiante) == 0) {
+                return response([
+                    'message' => 'No se encuentra el carnet de identidad'
+                ],422);
+            }
+            else {
+                return $estudiante;
+            }
 
 
 

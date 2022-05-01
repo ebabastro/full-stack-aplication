@@ -44,9 +44,15 @@ class TrabajadorController extends Controller
             ->where('trabajadors.baja','=','0')
             ->get();
 
+        if (sizeof($trabajador) == 0) {
+            return response([
+                'message' => 'No se encuentra el carnet de identidad'
+            ],422);
+        }
+        else {
+            return $trabajador;
+        }
         
-
-        return $trabajador;
 
 
 
