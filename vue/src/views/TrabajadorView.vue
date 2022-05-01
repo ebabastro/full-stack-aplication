@@ -104,6 +104,56 @@
                 Docente
               </dd>
             </div>
+            <div
+              class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+            >
+              <dt class="text-md font-medium text-gray-500">
+                Categoría Ocupacional
+              </dt>
+              <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
+                {{ campo.cate_ocupa }}
+              </dd>
+            </div>
+            <div
+              class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+            >
+              <dt class="text-md font-medium text-gray-500">
+                Categoría Docente Investigativa
+              </dt>
+              <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
+                {{ campo.cate_di }}
+              </dd>
+            </div>
+            <div
+              class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+            >
+              <dt class="text-md font-medium text-gray-500">
+                Grado Científico
+              </dt>
+              <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
+                {{ campo.grado_cientifico }}
+              </dd>
+            </div>
+            <div
+              class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+            >
+              <dt class="text-md font-medium text-gray-500">
+                Área
+              </dt>
+              <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
+                {{ campo.area }}
+              </dd>
+            </div>
+            <div
+              class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+            >
+              <dt class="text-md font-medium text-gray-500">
+                Cargo
+              </dt>
+              <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
+                {{ campo.cargo }}
+              </dd>
+            </div>
           </dl>
         </div>
       </div>
