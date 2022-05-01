@@ -15,11 +15,38 @@
         </router-link>
       </p> -->
     </div>
-      <ModalComponent :open="modal" :errorMsg="errorMsg" @clicked="closeModal">
-        <template v-slot:modal-header>
-          Error de autenticación
+      <AlertModal :open="modal" @clicked="closeModal">
+        <template v-slot:alert-content>
+          <div
+            v-if="error"
+            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+          >
+            <ExclamationIcon
+              class="h-6 w-6 text-red-600"
+              aria-hidden="true"
+            />
+          </div>
+          
+          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <DialogTitle
+              as="h3"
+              class="text-lg leading-6 font-medium text-gray-900"
+            >
+              Error de autenticación
+            </DialogTitle>
+          
+            <div v-if="error" class="mt-2">
+              <p class="text-sm text-gray-500">
+                {{ errorMsg }}
+              </p>
+            </div>
+          </div>
         </template>
-      </ModalComponent>
+        
+          
+        
+       
+      </AlertModal>
     <form class="mt-8 space-y-6" @submit="login">
 
 
@@ -86,11 +113,12 @@
 </template>
 
 <script setup>
-import { LockClosedIcon, LockOpenIcon, UserIcon } from "@heroicons/vue/solid";
+import { LockClosedIcon, LockOpenIcon, UserIcon, ExclamationIcon } from "@heroicons/vue/solid";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import store from "../store";
 import ModalComponent from "../components/ModalComponent.vue";
+import AlertModal from "../components/AlertModal.vue";
 
 const router = useRouter();
 
@@ -101,7 +129,7 @@ const user = {
 };
 
 let errorMsg = ref("");
-
+let error = ref(false);
 let modal = ref(false);
 
 function closeModal(value) {
@@ -118,6 +146,7 @@ function login(ev) {
       });
     })
     .catch((err) => {
+      error.value = true;
       errorMsg.value = err.response.data.error;
       modal.value = true;
     });

@@ -5,11 +5,32 @@
         Buscar Estudiante
       </h1>
     </template>
-    <ModalComponent :open="modal" :errorMsg="errorMsg" @clicked="closeModal">
-      <template v-slot:modal-header>
-        Carnet de Identidad no encontrado
+    <AlertModal :open="modal" :errorMsg="errorMsg" @clicked="closeModal">
+      <template v-slot:alert-content>
+        <div
+          v-if="error"
+          class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+        >
+          <ExclamationIcon
+            class="h-6 w-6 text-red-600"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+          <DialogTitle
+            as="h3"
+            class="text-lg leading-6 font-medium text-gray-900"
+          >
+            Error de búsqueda
+          </DialogTitle>
+          <div v-if="error" class="mt-2">
+              <p class="text-sm text-gray-500">
+                {{ errorMsg }}
+              </p>
+            </div>
+        </div>
       </template>
-    </ModalComponent>
+    </AlertModal>
 
 
     <div
@@ -54,17 +75,18 @@
 
 <script setup>
 import store from "../store";
-import { LockClosedIcon, LinkIcon, SearchIcon } from "@heroicons/vue/solid";
+import { LockClosedIcon, LinkIcon, SearchIcon, ExclamationIcon, CheckIcon } from "@heroicons/vue/solid";
 import PageComponent from "../components/PageComponent.vue";
 import { computed, ref } from "@vue/reactivity";
 import router from "../router";
 import ModalComponent from "../components/ModalComponent.vue";
+import AlertModal from "../components/AlertModal.vue";
 
 const ci = ref();
 
 const errorMsg = ref("");
-
 let modal = ref(false);
+let error = ref(false);
 
 function closeModal(value) {
   modal.value = value;
@@ -80,6 +102,7 @@ function getEstudiante(ev) {
       });
     })
     .catch((err) => {
+      error.value = true;
       errorMsg.value = err.response.data.message;
       modal.value = true;
     });
