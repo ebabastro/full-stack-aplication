@@ -1,10 +1,40 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <ModalComponent :open="modal" :msg="msg" @clicked="closeModal" :error="error">
-    <template v-slot:modal-header>
-      {{status}}
+  <AlertModal :open="modal" @clicked="closeModal">
+    <template v-slot:alert-content>
+      <div
+        v-if="error"
+        class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+      >
+        <ExclamationIcon
+          class="h-6 w-6 text-red-600"
+          aria-hidden="true"
+        />
+      </div>
+      <div
+        v-else
+        class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
+      >
+        <CheckIcon
+          class="h-6 w-6 text-green-600"
+          aria-hidden="true"
+        />
+      </div>
+      <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+        <DialogTitle
+          as="h3"
+          class="text-lg leading-6 font-medium text-gray-900"
+        >
+          {{status}}
+        </DialogTitle>
+        <div v-if="error" class="mt-2">
+          <p class="text-sm text-gray-500">
+            {{ msg }}
+          </p>
+        </div>
+      </div>
     </template>
-  </ModalComponent>
+  </AlertModal>
   <TransitionRoot as="template" :show="open">
     <Dialog as="div" class="fixed z-10 inset-0 overflow-y-auto">
       <div
@@ -163,10 +193,11 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
-import { ExclamationIcon, UserIcon } from "@heroicons/vue/outline";
+import { ExclamationIcon, UserIcon, CheckIcon } from "@heroicons/vue/outline";
 import store from "../store";
 import { computed, ref } from "@vue/reactivity";
 import ModalComponent from "./ModalComponent.vue";
+import AlertModal from "./AlertModal.vue";
 
 const props = defineProps({
   open: Boolean,
@@ -196,6 +227,7 @@ function createUser(ev) {
       modal.value = true;
     })
       .catch((err) => {
+        msg.value = err.response.data.message;
         status.value = "Error durante la creación de usuario";
         error.value = true;
         modal.value = true;
