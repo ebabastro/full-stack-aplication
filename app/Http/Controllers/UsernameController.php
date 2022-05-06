@@ -12,7 +12,6 @@ class UsernameController extends Controller
 
     public function createUser(Request $request)
     {
-
         $rules = [
             'ci' => 'bail|required|unique:usernames,ci',
             'username' => 'bail|required|string|unique:usernames,username',
