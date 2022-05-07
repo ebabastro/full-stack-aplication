@@ -65,7 +65,7 @@
             v-model="user.password_confirmation"
             id="password_confirmation"
             name="password_confirmation"
-            type="password"
+            type="input"
             autocomplete="current-password_confirmation"
             required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -123,7 +123,7 @@ import store from "../store";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-
+const areas = computed(() => store.state.areas);
 const user = {
   name: "",
   email: "",

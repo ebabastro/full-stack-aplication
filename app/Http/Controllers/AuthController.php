@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|unique:users,name',
-            'email' => 'required|email|string|unique:users,email',
+            'area' => 'required|area|string',
             'password' => [
                 'required',
                 'confirmed',
@@ -23,7 +23,7 @@ class AuthController extends Controller
         /** @var \App\Models\User $user */
         $user = User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
+            'area' => $data['area'],
             'password' => bcrypt($data['password']),
         ]);
         

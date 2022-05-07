@@ -25,6 +25,7 @@ const store = createStore({
         },
         estudiante: [],
         trabajador: [],
+        areas: [],
     },
     getters: {},
     actions: {
@@ -76,6 +77,13 @@ const store = createStore({
                 .then(response => {
                     return response;
                 })
+        },
+        getArea({ commit }) {
+            return axiosClient.get('/llenarSelect')
+                .then(({ data }) => {
+                    commit('setAreas', data)
+                    return data;
+                })
         }
 
     },
@@ -94,6 +102,9 @@ const store = createStore({
         },
         setTrabajador: (state, trabajadorData) => {
             state.trabajador = trabajadorData;
+        },
+        setAreas: (state, areasData) => {
+            state.areas = areasData;
         }
     },
     modules: {},
