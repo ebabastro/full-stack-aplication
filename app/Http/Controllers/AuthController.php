@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|unique:users,name',
-            'area' => 'required|area|string',
+            'area' => 'required|string',
             'password' => [
                 'required',
                 'confirmed',

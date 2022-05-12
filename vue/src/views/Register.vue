@@ -2,18 +2,8 @@
   <div>
     <div>
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Register for free
+        Registro
       </h2>
-      <p class="mt-2 text-center text-sm text-gray-600">
-        Or
-        {{ "" }}
-        <router-link
-          :to="{ name: 'Login' }"
-          class="font-medium text-indigo-600 hover:text-indigo-500"
-        >
-          login to your account
-        </router-link>
-      </p>
     </div>
     <form class="mt-8 space-y-6" @submit="register">
       <input type="hidden" name="remember" value="true" />
@@ -32,17 +22,20 @@
           />
         </div>
         <div>
-          <label for="email-address" class="sr-only">Email address</label>
-          <input
-            v-model="user.email"
-            id="email-address"
-            name="email"
-            type="email"
-            autocomplete="email"
+          <label for="area" class="sr-only">Área</label>
+          <select
+            v-model="user.area"
+            id="area"
+            name="area"
             required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Email address"
-          />
+            placeholder="Área"
+            options="areas"
+          >
+            <option v-for="area in areas" :value="area.value">
+              {{ area.value }}
+            </option>
+          </select>
         </div>
         <div>
           <label for="password" class="sr-only">Password</label>
@@ -65,7 +58,7 @@
             v-model="user.password_confirmation"
             id="password_confirmation"
             name="password_confirmation"
-            type="input"
+            type="password"
             autocomplete="current-password_confirmation"
             required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -117,16 +110,37 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onBeforeMount, computed } from "vue";
+// import { computed } from "@vue/reactivity";
 import { LockClosedIcon } from "@heroicons/vue/solid";
 import store from "../store";
 import { useRouter } from "vue-router";
+import axiosClient from "../axios";
 
 const router = useRouter();
-const areas = computed(() => store.state.areas);
+const areas = ref([
+  { value: "CULTURA FISICA" },
+  { value: "CIENCIAS ECONOMICAS Y EMPRESARIALES" },
+  { value: "CIENCIAS SOCIALES Y HUMANISTICAS" },
+  { value: "AGRO FORESTAL " },
+  { value: "INGENIERIA Y CIENCIAS TECNICAS DE LA EDUCACION" },
+  { value: "EDUCACION" },
+  { value: "EDUCACION INFANTIL" },
+  { value: "CUM EL SALVADOR" },
+  { value: "CUM GUANTANAMO " },
+  { value: "CUM YATERAS" },
+  { value: "CUM BARACOA " },
+  { value: "CUM MAISI" },
+  { value: "CUM IMIAS" },
+  { value: "CUM SAN ANTONIO DEL SUR" },
+  { value: "CUM MANUEL TAMES" },
+  { value: "CUM NICETO PEREZ " },
+  { value: "CUM DE PRISIONES" },
+  { value: "GENERAL" },
+]);
 const user = {
   name: "",
-  email: "",
+  area: "",
   password: "",
   password_confirmation: "",
 };

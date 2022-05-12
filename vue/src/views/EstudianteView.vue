@@ -32,15 +32,20 @@
                 Detalles personales y de ubicación.
               </p>
             </div>
-            <div class="py-2 flex justify-end">
+            <div 
+            v-if="true"
+            class="py-2 flex justify-end">
               <button
-                @click="modal=true"
+                @click="denied"
                 type="button"
                 class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
               >
                 <UserAddIcon  class="w-5 h-5 mr-2 -ml-1" />
                 Crear Usuario
               </button>
+            </div>
+            <div v-else>
+              No tienes permiso para crear usuarios que no pertenezcan a tu área
             </div>
           </div>
         </div>
@@ -141,13 +146,35 @@ import PageComponent from "../components/PageComponent.vue";
 import ModalFormEstudianteComponent from "../components/ModalFormEstudianteComponent.vue";
 import { computed, ref } from "@vue/reactivity";
 import store from "../store";
-import { onMounted } from "@vue/runtime-core";
+import AlertModal from "../components/AlertModal.vue";
 
 // let showForm = ref(false);
 
 let modal = ref(false);
 
+const informatico = computed(() => store.state.user.data.area);
 const estudiante = computed(() => store.state.estudiante);
+// const show_all = computed(() => store.state.permiso);
+
+function permiso(){
+  let area_estudiante = estudiante.ubicacion_escolar;
+  // area_estudiante = area_estudiante.replace(/\s+/g, '');
+  // informatico = informatico.replace(/\s+/g, '');
+
+  // if (informatico == 'GENERAL'){
+  //   denied = true;
+  //   modal = false;
+  // }
+  // else if(informatico == area_estudiante){
+  //   denied = true;
+  //   modal  = false;
+  // }
+  // else{
+  //   denied = false;
+  //   modal = true;
+  // }
+  return area_estudiante;
+}
 
 const user = {
     ci: "",
@@ -161,6 +188,22 @@ function createUserEstudiante(ev) {
     store.dispatch('createUserEstudiante', user);
 }
 
+
+
+// function compareArea(){
+//   area_estudiante = estudiante.ubicacion_escolar.replace(/\s+/g, '');
+//   area_informatico = area_informatico.replace(/\s+/g, '');
+
+//   if (area_informatico == 'GENERAL') {
+//     show_all = true;
+//   }
+//   else if(area_informatico == area_estudiante){
+//     show_all = true;
+//   }
+//   else{
+//     show_all = false;
+//   }
+// }
 
 </script>
 

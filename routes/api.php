@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\TrabajadorController;
@@ -32,4 +33,6 @@ Route::post('/getEstudiante',[EstudianteController::class, 'getEstudiante']);
 Route::post('/getTrabajador',[TrabajadorController::class, 'getTrabajador']);
 
 Route::post('/createUser',[UsernameController::class, 'createUser']);
+
+Route::get('/getAreas', [AreaController::class, 'getAreas']);
 
