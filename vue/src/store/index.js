@@ -1,22 +1,6 @@
 import { createStore } from "vuex";
 import axiosClient from "../axios";
 
-// const tmpEstudiante = [{
-//     id: 261,
-//     ci: '91112820989',
-//     name: 'Erislandy',
-//     last_name_1: 'Babastro',
-//     last_name_2: 'Pousada',
-//     address: 'Luz Caballero #1068 E/ Marmol y Varona',
-//     phone: '54193044',
-//     carrera: 'Telecomunicaciones',
-//     tipo_curso: 'Diurno',
-//     estado: 'Activo',
-//     facultad: 'Electrica',
-//     cum: '',
-//     anno: 'Tercero'
-// }, ];
-
 const store = createStore({
     state: {
         user: {
@@ -25,7 +9,6 @@ const store = createStore({
         },
         estudiante: [],
         trabajador: [],
-        areas: [],
     },
     getters: {},
     actions: {
@@ -44,7 +27,7 @@ const store = createStore({
                 })
         },
         getEstudiante({ commit }, ci) {
-            return axiosClient.post('/getEstudiante', ci)
+            return axiosClient.post('/getEstudiante', ci, this.state.user.data.area)
                 .then(({ data }) => {
                     commit('setEstudiante', data);
                     return data;
@@ -98,7 +81,7 @@ const store = createStore({
             sessionStorage.setItem("TOKEN", userData.token);
         },
         setEstudiante: (state, estudianteData) => {
-            state.estudiante = estudianteData;
+            state.estudiante = estudianteData.estudiante;
         },
         setTrabajador: (state, trabajadorData) => {
             state.trabajador = trabajadorData;

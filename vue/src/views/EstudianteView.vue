@@ -1,14 +1,13 @@
 <template>
   <PageComponent>
-    <ModalFormEstudianteComponent :open="modal" @clicked="modal=false" > 
+    <ModalFormEstudianteComponent :open="modal" @clicked="modal = false">
     </ModalFormEstudianteComponent>
 
     <div class="flex justify-center container vue">
       <div
-        v-if="estudiante.length"
+        v-if="estudiante"
         class="bg-white shadow overflow-hidden sm:rounded-lg w-[75%]"
       >
-
         <div class="px-4 py-5 sm:px-6 flex-col">
           <div
             class="flex justify-start mb-9 group relative"
@@ -32,25 +31,23 @@
                 Detalles personales y de ubicación.
               </p>
             </div>
-            <div 
-            v-if="true"
-            class="py-2 flex justify-end">
+            <div v-if="permiso" class="py-2 flex justify-end">
               <button
-                @click="denied"
+                @click="modal = true"
                 type="button"
                 class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
               >
-                <UserAddIcon  class="w-5 h-5 mr-2 -ml-1" />
+                <UserAddIcon class="w-5 h-5 mr-2 -ml-1" />
                 Crear Usuario
               </button>
             </div>
             <div v-else>
-              No tienes permiso para crear usuarios que no pertenezcan a tu área
+              No tienes permiso
             </div>
           </div>
         </div>
         <div class="border-t border-gray-200">
-          <dl v-for="campo in estudiante" :key="campo.id">
+          <dl v-if="estudiante">
             <div
               class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
             >
@@ -58,7 +55,7 @@
                 Carnet de Identidad
               </dt>
               <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ campo.ci }}
+                {{ estudiante.ci }}
               </dd>
             </div>
             <div
@@ -66,7 +63,7 @@
             >
               <dt class="text-md font-medium text-gray-500">Nombre Completo</dt>
               <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ campo.full_name }}
+                {{ estudiante.full_name }}
               </dd>
             </div>
             <div
@@ -76,7 +73,7 @@
                 Dirección Particular
               </dt>
               <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ campo.address }}
+                {{ estudiante.address }}
               </dd>
             </div>
 
@@ -85,7 +82,7 @@
             >
               <dt class="text-md font-medium text-gray-500">Teléfono</dt>
               <dd
-                v-if="!campo.phone"
+                v-if="!estudiante.phone"
                 class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2"
               >
                 ----
@@ -94,7 +91,7 @@
                 v-else
                 class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ campo.phone }}
+                {{ estudiante.phone }}
               </dd>
             </div>
             <div
@@ -104,7 +101,7 @@
                 Ubicación Escolar
               </dt>
               <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2 flex">
-                {{ campo.ubicacion_escolar }}
+                {{ estudiante.ubicacion_escolar }}
               </dd>
             </div>
             <div
@@ -112,7 +109,7 @@
             >
               <dt class="text-md font-medium text-gray-500">Carrera</dt>
               <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ campo.carrera }}
+                {{ estudiante.carrera }}
               </dd>
             </div>
             <div
@@ -120,7 +117,7 @@
             >
               <dt class="text-md font-medium text-gray-500">Tipo de Curso</dt>
               <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ campo.tipo_curso }}
+                {{ estudiante.tipo_curso }}
               </dd>
             </div>
             <div
@@ -128,7 +125,7 @@
             >
               <dt class="text-md font-medium text-gray-500">Año</dt>
               <dd class="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ campo.anno }}
+                {{ estudiante.anno }}
               </dd>
             </div>
           </dl>
@@ -141,70 +138,46 @@
 <script setup>
 import router from "../router";
 import { UserAddIcon, ArrowNarrowLeftIcon } from "@heroicons/vue/solid";
-import { ArrowCircleLeftIcon } from "@heroicons/vue/outline";
 import PageComponent from "../components/PageComponent.vue";
 import ModalFormEstudianteComponent from "../components/ModalFormEstudianteComponent.vue";
 import { computed, ref } from "@vue/reactivity";
 import store from "../store";
-import AlertModal from "../components/AlertModal.vue";
-
-// let showForm = ref(false);
+import { onMounted } from "@vue/runtime-core";
 
 let modal = ref(false);
-
-const informatico = computed(() => store.state.user.data.area);
+let permiso = ref(false);
 const estudiante = computed(() => store.state.estudiante);
-// const show_all = computed(() => store.state.permiso);
+const informatico = computed(() => store.state.user.data.area);
 
-function permiso(){
-  let area_estudiante = estudiante.ubicacion_escolar;
-  // area_estudiante = area_estudiante.replace(/\s+/g, '');
-  // informatico = informatico.replace(/\s+/g, '');
+onMounted(() => {
+  let area_estudiante = estudiante._value.ubicacion_escolar.replace(/\s+/g, '');
+  let area_informatico = informatico.value.replace(/\s+/g, '');
 
-  // if (informatico == 'GENERAL'){
-  //   denied = true;
-  //   modal = false;
-  // }
-  // else if(informatico == area_estudiante){
-  //   denied = true;
-  //   modal  = false;
-  // }
-  // else{
-  //   denied = false;
-  //   modal = true;
-  // }
-  return area_estudiante;
-}
+  // console.log(area_informatico);
+  if(informatico.value == "GENERAL" || area_estudiante == area_informatico){
+    permiso.value = true
+    // return permiso;
+    
+  }
+  else {
+    permiso.value = false;
+    // return permiso;
+    
+  }
+  // console.log(area_estudiante)
+})
 
 const user = {
-    ci: "",
-    username : "",
-    password: "",
-    password_confirmation: "",
+  ci: "",
+  username: "",
+  password: "",
+  password_confirmation: "",
 };
 
 function createUserEstudiante(ev) {
-    ev.preventDefault();
-    store.dispatch('createUserEstudiante', user);
+  ev.preventDefault();
+  store.dispatch("createUserEstudiante", user);
 }
-
-
-
-// function compareArea(){
-//   area_estudiante = estudiante.ubicacion_escolar.replace(/\s+/g, '');
-//   area_informatico = area_informatico.replace(/\s+/g, '');
-
-//   if (area_informatico == 'GENERAL') {
-//     show_all = true;
-//   }
-//   else if(area_informatico == area_estudiante){
-//     show_all = true;
-//   }
-//   else{
-//     show_all = false;
-//   }
-// }
-
 </script>
 
 <style></style>
