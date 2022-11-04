@@ -48,21 +48,21 @@ const store = createStore({
                 })
         },
         createUserEstudiante({ commit }, user) {
-            user.ci = this.state.estudiante[0].ci;
+            user.ci = this.state.estudiante.ci;
             return axiosClient.post('/createUser', user)
                 .then(response => {
                     return response;
                 })
         },
         createUserTrabajador({ commit }, user) {
-            user.ci = this.state.trabajador[0].ci;
+            user.ci = this.state.trabajador.ci;
             return axiosClient.post('/createUser', user)
                 .then(response => {
                     return response;
                 })
         },
-        getArea({ commit }) {
-            return axiosClient.get('/llenarSelect')
+        getAreas({ commit }) {
+            return axiosClient.get('/getAreas')
                 .then(({ data }) => {
                     commit('setAreas', data)
                     return data;

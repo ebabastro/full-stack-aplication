@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            // $table->dropColumn('email');
-            $table->dropColumn('email_verified_at');
-            $table->string('area')->after('password');
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     // $table->dropColumn('email');
+        //     $table->dropColumn('email_verified_at');
+        //     $table->string('area')->after('password');
+        // });
     }
 
     /**

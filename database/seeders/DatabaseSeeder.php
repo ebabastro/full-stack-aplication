@@ -23,12 +23,12 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoCursoSeeder::class);
         $this->call(CarreraSeeder::class);
         $this->call(EstudianteSeeder::class);
-        $this->call(TrabajadorAreaSeeder::class);
-        $this->call(TrabajadorCargoSeeder::class);
-        $this->call(TrabajadorCategoriaDocenteInvestigativaSeeder::class);
-        $this->call(TrabajadorCategoriaOcupacionalSeeder::class);
-        $this->call(TrabajadorGradoCientificoSeeder::class);
-        $this->call(TrabajadorProfesionSeeder::class);
-        $this->call(TrabajadorSeeder::class);
+        // $this->call(TrabajadorAreaSeeder::class);
+        // $this->call(TrabajadorCargoSeeder::class);
+        // $this->call(TrabajadorCategoriaDocenteInvestigativaSeeder::class);
+        // $this->call(TrabajadorCategoriaOcupacionalSeeder::class);
+        // $this->call(TrabajadorGradoCientificoSeeder::class);
+        // $this->call(TrabajadorProfesionSeeder::class);
+        // $this->call(TrabajadorSeeder::class);
     }
 }

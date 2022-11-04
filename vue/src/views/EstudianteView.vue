@@ -42,7 +42,12 @@
               </button>
             </div>
             <div v-else>
-              No tienes permiso
+              <p
+                class="text-white bg-red-600 font-medium rounded-lg text-md px-5 py-2.5 text-center"
+              >
+                El estudiante no pertenece a su facultad.<br>
+                No tiene permiso para la administracion de la cuenta.
+              </p>
             </div>
           </div>
         </div>
@@ -150,22 +155,19 @@ const estudiante = computed(() => store.state.estudiante);
 const informatico = computed(() => store.state.user.data.area);
 
 onMounted(() => {
-  let area_estudiante = estudiante._value.ubicacion_escolar.replace(/\s+/g, '');
-  let area_informatico = informatico.value.replace(/\s+/g, '');
+  let area_estudiante = estudiante._value.ubicacion_escolar.replace(/\s+/g, "");
+  let area_informatico = informatico.value.replace(/\s+/g, "");
 
   // console.log(area_informatico);
-  if(informatico.value == "GENERAL" || area_estudiante == area_informatico){
-    permiso.value = true
+  if (informatico.value == "GENERAL" || area_estudiante == area_informatico) {
+    permiso.value = true;
     // return permiso;
-    
-  }
-  else {
+  } else {
     permiso.value = false;
     // return permiso;
-    
   }
   // console.log(area_estudiante)
-})
+});
 
 const user = {
   ci: "",

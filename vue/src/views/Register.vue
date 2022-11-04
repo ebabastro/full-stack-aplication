@@ -32,8 +32,8 @@
             placeholder="Área"
             options="areas"
           >
-            <option v-for="area in areas" :value="area.value">
-              {{ area.value }}
+            <option v-for="area in areas">
+              {{ area.name }}
             </option>
           </select>
         </div>
@@ -110,7 +110,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed } from "vue";
+import { ref, onBeforeMount, onMounted, computed } from "vue";
 // import { computed } from "@vue/reactivity";
 import { LockClosedIcon } from "@heroicons/vue/solid";
 import store from "../store";
@@ -119,24 +119,24 @@ import axiosClient from "../axios";
 
 const router = useRouter();
 const areas = ref([
-  { value: "CULTURA FISICA" },
-  { value: "CIENCIAS ECONOMICAS Y EMPRESARIALES" },
-  { value: "CIENCIAS SOCIALES Y HUMANISTICAS" },
-  { value: "AGRO FORESTAL " },
-  { value: "INGENIERIA Y CIENCIAS TECNICAS DE LA EDUCACION" },
-  { value: "EDUCACION" },
-  { value: "EDUCACION INFANTIL" },
-  { value: "CUM EL SALVADOR" },
-  { value: "CUM GUANTANAMO " },
-  { value: "CUM YATERAS" },
-  { value: "CUM BARACOA " },
-  { value: "CUM MAISI" },
-  { value: "CUM IMIAS" },
-  { value: "CUM SAN ANTONIO DEL SUR" },
-  { value: "CUM MANUEL TAMES" },
-  { value: "CUM NICETO PEREZ " },
-  { value: "CUM DE PRISIONES" },
-  { value: "GENERAL" },
+  { name: "CULTURA FISICA" },
+  { name: "CIENCIAS ECONOMICAS Y EMPRESARIALES" },
+  { name: "CIENCIAS SOCIALES Y HUMANISTICAS" },
+  { name: "AGRO FORESTAL " },
+  { name: "INGENIERIA Y CIENCIAS TECNICAS DE LA EDUCACION" },
+  { name: "EDUCACION" },
+  { name: "EDUCACION INFANTIL" },
+  { name: "CUM EL SALVADOR" },
+  { name: "CUM GUANTANAMO " },
+  { name: "CUM YATERAS" },
+  { name: "CUM BARACOA " },
+  { name: "CUM MAISI" },
+  { name: "CUM IMIAS" },
+  { name: "CUM SAN ANTONIO DEL SUR" },
+  { name: "CUM MANUEL TAMES" },
+  { name: "CUM NICETO PEREZ " },
+  { name: "CUM DE PRISIONES" },
+  { name: "GENERAL" },
 ]);
 const user = {
   name: "",
@@ -144,6 +144,15 @@ const user = {
   password: "",
   password_confirmation: "",
 };
+
+// // let areas = ref([]);
+// onBeforeMount(() => {
+//   store.dispatch("getAreas");
+// })
+// onMounted(() => {
+//   const areas = computed(() => store.state.areas);
+//   console.log(areas);
+// })
 
 function register(ev) {
   ev.preventDefault();
